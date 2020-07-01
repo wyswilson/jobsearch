@@ -1,0 +1,27 @@
+    {
+        "from" : 0, "size" : 5,
+        "query" : {
+            "bool": {
+                "must": [
+                        {
+      "multi_match": {
+        "query": "Product Manager",
+        "fields": [
+          "doctitle",
+          "doctext"
+        ],
+        "type" : "phrase",
+        "slop": 1
+      }
+    }
+                ]
+                
+            }
+        },
+           "aggs": {
+        "doccompanies": {
+             "terms": {"field": "doccompany"}
+        }
+   },
+        "sort": { "_score": { "order": "desc" }}
+    }
